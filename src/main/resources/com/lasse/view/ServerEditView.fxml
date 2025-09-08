@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lasse.view.ServerEditView">
+			<Label text="Neuer Server:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+			<TextField fx:id="serverField" prefColumnCount="30" promptText="Neuer Server" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+  	        <ComboBox fx:id="typCombo" promptText="Typ" GridPane.columnIndex="1" GridPane.rowIndex="1">
+ 			   	<items>
+			   	   <FXCollections fx:factory="observableArrayList">
+			       </FXCollections>
+  			    </items>
+  			</ComboBox>
+			<Label text="Benutzer:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+			<TextField fx:id="userField" prefColumnCount="30" promptText="Benutzer" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+			<Label text="Kennwort:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+			<TextField fx:id="passwordField" prefColumnCount="30" promptText="Kennwort" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+   <ButtonBar GridPane.columnIndex="1" GridPane.rowIndex="5">
+      <GridPane.margin>
+         <Insets bottom="5.0" top="5.0" />
+      </GridPane.margin>
+   </ButtonBar>
+   <ButtonBar GridPane.columnIndex="1" GridPane.rowIndex="6">
+      <buttons>
+       		     <Button onAction="#save" text="Speichern" />
+   				 <Button onAction="#cancel" text="Abbrechen" />
+      </buttons>
+      <padding>
+         <Insets bottom="5.0" top="5.0" />
+      </padding>
+   </ButtonBar>
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</GridPane>

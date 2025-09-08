@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane fx:id="borderpane1" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lasse.view.SqlAbfragenView">
+   <center>
+      				<TableView fx:id="tableView" />
+   </center>
+   <top>
+      				<ButtonBar>
+      					<buttons>
+      						<Button fx:id="addButton" mnemonicParsing="false" onAction="#add" text="Hinzufügen" />
+      						<Button fx:id="copyButton" mnemonicParsing="false" onAction="#copy" text="Kopieren" />
+      						<Button fx:id="updateButton" mnemonicParsing="false" onAction="#update" text="Ändern" />
+      						<Button fx:id="deleteButton" mnemonicParsing="false" onAction="#delete" text="Löschen" />
+      						<Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#cancel" text="Abbrechen" />
+            <Button fx:id="execButton" mnemonicParsing="false" onAction="#execute" text="Ausführen" />
+      					</buttons>
+         <BorderPane.margin>
+            <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+         </BorderPane.margin>
+      				</ButtonBar>
+   </top>
+   <padding>
+      <Insets bottom="60.0" left="4.0" right="20.0" top="4.0" />
+   </padding>
+</BorderPane>

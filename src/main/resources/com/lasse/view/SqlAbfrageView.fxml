@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lasse.view.SqlAbfrageView">
+   <top>
+      <GridPane vgap="5.0" BorderPane.alignment="CENTER">
+      			<TextField fx:id="name" prefColumnCount="30" promptText="Name" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+         <ButtonBar GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <buttons>
+             		     <Button onAction="#save" text="Speichern" />
+         				 <Button onAction="#cancel" text="Abbrechen" />
+               <Button mnemonicParsing="false" onAction="#addParameter" text="Parameter hinzufügen" />
+               <Button mnemonicParsing="false" onAction="#removeParameter" text="Parameter löschen" />
+            </buttons>
+            <padding>
+               <Insets bottom="5.0" top="5.0" />
+            </padding>
+         </ButtonBar>
+         <Label prefHeight="17.0" prefWidth="86.0" text="Name" />
+      			<Label text="SQL" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+         <TextArea fx:id="sql" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         <columnConstraints>
+            <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="85.0" prefWidth="85.0" />
+            <ColumnConstraints maxWidth="650.0" minWidth="198.0" prefWidth="650.0" />
+            <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </GridPane>
+   </top>
+   <center>
+      <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+   <bottom>
+      <ComboBox fx:id="msgLine2" prefHeight="25.0" prefWidth="800.0" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import com.lasse.view.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.lasse.view.FelderView">
+	<top>
+		<BorderPane>
+			<center>
+				<HBox>
+					<Button fx:id="cancelButton" text="Beenden" onAction="#cancel"/>
+					<Button fx:id="insertButton" text="Einfügen" onAction="#insert"/>
+				</HBox>
+			</center>
+		</BorderPane>
+	</top>
+	
+    <center>
+		<VBox>
+			<children>
+	   	 		<TableView fx:id="tableView" VBox.vgrow="ALWAYS">
+		     	</TableView>
+			</children>
+		</VBox>
+    </center>
+
+    <bottom>
+		<BorderPane>
+			<center>
+			<GridPane>
+				<Label text="Finden:"	
+					GridPane.columnIndex="0" 	GridPane.rowIndex="0"
+				/>
+				<TextField fx:id="findField" promptText="Finden" prefColumnCount="30"
+			   		GridPane.columnIndex="1" 	GridPane.rowIndex="0"
+		    	/>
+				<Button fx:id="findButton" text="Finden" onAction="#find" GridPane.columnIndex="2" 	GridPane.rowIndex="0"/>
+			</GridPane>
+			</center>
+		    <bottom>
+		      <MessageLine fx:id="msgLine">
+	    		<items>
+	     		   <FXCollections fx:factory="observableArrayList">
+	       	 	 	</FXCollections>
+	    		</items>
+	    	  </MessageLine>
+		    </bottom>
+		</BorderPane>
+    </bottom>
+    
+</BorderPane>
