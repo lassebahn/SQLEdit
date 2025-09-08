@@ -1,0 +1,1 @@
+java -Dlog4j.configurationFile=file:///c:/sqleditfx/log4j2.xml -jar SqlEditFX3-0.0.1-SNAPSHOT-spring-boot.jar

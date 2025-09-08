@@ -1,0 +1,27 @@
+{
+  "abfragen" : [ {
+    "name" : "Indices",
+    "nummer" : 1,
+    "sql" : "SELECT \n    t.name        AS table_name,\n    i.name        AS index_name,\n    i.type_desc   AS index_type,\n    c.name        AS column_name,\n    ic.is_included_column\nFROM sys.indexes i\nINNER JOIN sys.index_columns ic \n    ON i.object_id = ic.object_id \n   AND i.index_id  = ic.index_id\nINNER JOIN sys.columns c \n    ON ic.object_id = c.object_id \n   AND ic.column_id = c.column_id\nINNER JOIN sys.tables t \n    ON i.object_id = t.object_id\nWHERE t.name = ?\nORDER BY i.name, ic.key_ordinal",
+    "felder" : [ {
+      "bezeichnung" : "Tabelle",
+      "wert" : "IIM"
+    } ]
+  }, {
+    "name" : "Alle Tabellen",
+    "nummer" : 2,
+    "sql" : "SELECT TABLE_SCHEMA, TABLE_NAME\nFROM INFORMATION_SCHEMA.TABLES\nWHERE TABLE_TYPE = 'BASE TABLE'\nORDER BY TABLE_SCHEMA, TABLE_NAME",
+    "felder" : [ {
+      "bezeichnung" : "Tabelle LIKE",
+      "wert" : ""
+    } ]
+  }, {
+    "name" : "Tabelle suchen",
+    "nummer" : 3,
+    "sql" : "SELECT TABLE_SCHEMA, TABLE_NAME\nFROM INFORMATION_SCHEMA.TABLES\nWHERE TABLE_TYPE = 'BASE TABLE'\nAND TABLE_NAME LIKE ?\nORDER BY TABLE_SCHEMA, TABLE_NAME",
+    "felder" : [ {
+      "bezeichnung" : "Tabelle LIKE",
+      "wert" : "%IIM%"
+    } ]
+  } ]
+}
