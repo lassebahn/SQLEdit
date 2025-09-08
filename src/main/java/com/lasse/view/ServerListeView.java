@@ -94,6 +94,8 @@ public class ServerListeView extends BasisListeController<Server> {
 	private void select() {
 		savePressed = true;
 		server = tableView.getSelectionModel().getSelectedItem();
+		if (server == null)
+			return;
 		controller.setServerListe(getServerListe());
 		controller.setServernummer(getServer().getNummer(), getStagenr());
 		controller.setServer(getServer().getName(), getStagenr());

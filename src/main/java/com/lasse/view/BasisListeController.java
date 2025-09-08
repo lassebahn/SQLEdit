@@ -257,8 +257,7 @@ public class BasisListeController<TFX extends Daten> {
 		TFX d0 = tableView.getSelectionModel().getSelectedItem();
 		if (d0 != null) {
 			if (stage == null) {
-				FXMLLoader loader = stageManager.switchToNextScene(fxmlViewEdit, stagenr);
-				BasisEditController<TFX> e = loader.getController();
+				BasisEditController<TFX> e = stageManager.switchToNextScene(fxmlViewEdit, stagenr);
 				e.setMode(3);
 				d0.setNummer(0);
 				e.setDekoderFx(d0);

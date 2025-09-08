@@ -67,7 +67,7 @@ public class SqlEditVM {
 	private int max;
 	private boolean more = false;
 	private PasswordEncoder pe;
-	public final static String PROP_FILE = "sqledit.properties";
+	//public final static String PROP_FILE = "sqledit.properties";
 	private final static int MAXSEITE = 100;
 	private FileTableModel fileTable;
 	private ResultSetMetaData rsmd;
