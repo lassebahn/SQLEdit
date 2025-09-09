@@ -28,7 +28,7 @@ Dateien in das Verzeichnis "c:/sqleditfx" kopieren. Wenn ein anderes Verzeichnis
 Unter Datei/Server muss zuächst eine Datenbankverbindung angelegt werden. Sobald die Datenbankverbindung erstellt wurde, kann sie mit "Auswählen" ausgewählt.
 Danach in "SQL:" die SQL-Abfrage erfassen und mit "Ausführen" starten.
 Unter "SQL Abfragen" können SQL-Abfragen gespeichert und wieder geladen werden. Es ist möglich, Parameter im WHERE-Teil anzugeben.
-IM SQL-Statements müssen hierfür ? erfasst werden (z.B. "WHERE ARTIKEL = ?"). Die jeweiligen Bezeichnungen der Parameter sind unten in der Liste einzutragen.
+IM SQL-Statements müssen hierfür "?" erfasst werden (z.B. "WHERE ARTIKEL = ?"). Die jeweiligen Bezeichnungen der Parameter sind unten in der Liste einzutragen.
 Über den Schalter "Felder" im Hauptfenster kann eine Liste der Datenbank-Felder zu der jeweiligen SQL-Abfrage angezeigt werden.
 Über den Schalter "Detail" im Hauptfenster kann eine Detailansicht zu dem jeweiligen Datensatz angezeigt werden. Vorher ist eine Zeile in der Tabellen-Anzeige auszuwählen.
 Mit Datei/Speichern können SQL-Statements gespeichert werden.
@@ -38,7 +38,7 @@ Mit Datei/Excel ist ein Export der Daten in eine Excel-Datei möglich.
 ```bash
 # Projekt klonen
 git clone git@github.com:lassebahn/SQLEdit.git
-cd SqlEditFX3
+cd SqlEdit
 
 # Build mit Maven
 mvn clean install
