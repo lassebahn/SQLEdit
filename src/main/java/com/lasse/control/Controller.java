@@ -416,12 +416,16 @@ public class Controller {
 			EventSqlResponse er = new EventSqlResponse(this, servernr, null, event.getSql(), null, false, false, "Keine Datenbank-Verbindung vorhanden.", getStatus(servernr).get(), false, true);
 			publisher.publishEvent(er);
 		}
-		max[event.getServernr()] = MAXSEITE;
+		int maxrow = MAXSEITE;
+		if (event.getMaxrow() > 0) {
+			maxrow = event.getMaxrow();
+		}
+		max[event.getServernr()] = maxrow;
 		String s = event.getSql();
 		s = getDb(event.getServernr()).completeSql(s);
 		// sql zurückmelden...
 		ArrayList<Satz> liste = new ArrayList<Satz>();
-		int anz = lesen(s, liste, MAXSEITE, event.getMaxcol(), event.getServernr(), true, event.getSqlAbfrage());
+		int anz = lesen(s, liste, maxrow, event.getMaxcol(), event.getServernr(), true, event.getSqlAbfrage());
 	}
 
 	@EventListener

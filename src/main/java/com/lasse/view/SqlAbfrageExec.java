@@ -103,7 +103,7 @@ public class SqlAbfrageExec extends BasisEditController<SqlAbfrage> {
 	protected void exec() {
 		int maxCol = SqlEditView.MAXCOL;
 		stageManager.setCursor(Cursor.WAIT);
-		EventSqlRead event = new EventSqlRead(this, getStagenr(), "", maxCol);
+		EventSqlRead event = new EventSqlRead(this, getStagenr(), "", maxCol, 1000);
 		event.setSqlAbfrage(dekoderFx);
 		publisher.publishEvent(event);
 		SqlAbfragen sqlAbfragen = controller.getSqlAbfragen();

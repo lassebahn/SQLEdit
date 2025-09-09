@@ -342,7 +342,7 @@ public class SqlEditView {
 		} catch (NumberFormatException e) {
 		}
 		stageManager.setCursor(Cursor.WAIT);
-		EventSqlRead event = new EventSqlRead(this, servernr, sqlField.getText(), maxCol);
+		EventSqlRead event = new EventSqlRead(this, servernr, sqlField.getText(), maxCol, 0);
 		publisher.publishEvent(event);
 	}
 
@@ -464,6 +464,7 @@ public class SqlEditView {
 		FXMLLoader loader = stageManager.createFXMLLoader(FxmlView.SQLABFRAGENVIEW);
 		SqlAbfragenView v = loader.getController();
 		v.init(stage);
+		v.setStagenr(servernr);
 		stage.hide();
 		stageManager.showStage(loader, stage, true);
 	}
