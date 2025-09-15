@@ -21,6 +21,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -143,6 +144,16 @@ public class StageManager {
 				stage.setTitle("Verbindung " + vnr);
 				rootSqlEditView[stagenr] = rootNode;
 				fxmlController[stagenr] = v;
+				
+				 // Bildschirmgröße holen
+		        double screenWidth  = Screen.getPrimary().getBounds().getWidth();
+		        double screenHeight = Screen.getPrimary().getBounds().getHeight();
+
+		        // Fenstergröße z. B. auf 70% der Bildschirmgröße setzen
+		        double windowWidth  = screenWidth  * 0.7;
+		        double windowHeight = screenHeight * 0.7;
+		        stage.setWidth(windowWidth);
+		        stage.setHeight(windowHeight);
 			}
 			stage.show();
 		} catch (IOException e) {

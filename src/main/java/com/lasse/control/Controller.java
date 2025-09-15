@@ -408,7 +408,7 @@ public class Controller {
 	 * @return
 	 */
 	@EventListener
-	@Async
+	@Async("controllerExecutor")
 	public void read(EventSqlRead event) {
 		connect(false, event.getServernr());
 		if (!isConnected(event.getServernr())) {
@@ -429,7 +429,7 @@ public class Controller {
 	}
 
 	@EventListener
-	@Async
+	@Async("controllerExecutor")
 	public void readMore(EventSqlReadMore event) {
 		connect(false, event.getServernr());
 		if (!isConnected(event.getServernr())) {

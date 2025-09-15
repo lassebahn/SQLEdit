@@ -1,12 +1,18 @@
 package com.lasse.config;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.concurrent.Executor;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+import com.lasse.control.Controller;
 import com.lasse.control.FxmlLoader;
 import com.lasse.control.StageManager;
 
@@ -20,7 +26,7 @@ public class ApplicationConfig {
 
     private final FxmlLoader fxmlLoader;
     private final String applicationTitle;
-
+    
     public ApplicationConfig(FxmlLoader fxmlLoader,
                              @Value("${application.title}") String applicationTitle) {
         this.fxmlLoader = fxmlLoader;
@@ -38,4 +44,16 @@ public class ApplicationConfig {
     StageManager stageManager(Stage stage) throws IOException {
         return new StageManager(fxmlLoader, stage, applicationTitle);
     }
+    
+    @Bean(name = "controllerExecutor")
+    public Executor asyncExecutor() {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(5);
+        executor.setMaxPoolSize(10);
+        executor.setQueueCapacity(25);
+        executor.setThreadNamePrefix("Controller-");
+        executor.initialize();
+        return executor;
+    }
+
 }
