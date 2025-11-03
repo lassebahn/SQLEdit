@@ -17,6 +17,7 @@ Das Projekt kombiniert **Spring Boot** für Konfiguration & Dependency Injection
 - **Java 21** oder neuer  
 - **Maven 3.9+** (für den Build)  
 - Git (zum Klonen des Projekts)  
+- Falls MS SQL Server benutzt wird, ist darauf zu achten, dass im Sql Server Configuration Manager unter SQL Server-Netzwerkkonfiguration "TCP/IP" aktiviert ist. Unter Eigenschaften für "TCP/IP" sollte ein fester TCP-Port im Abschnitt IPAll eingetragen sein (z.B. Port 1433). 
 
 ---
 
@@ -37,7 +38,7 @@ Mit Datei/Excel ist ein Export der Daten in eine Excel-Datei möglich.
 ### Projekt bauen
 ```bash
 # Projekt klonen
-git clone git@github.com:lassebahn/SQLEdit.git
+git clone https://github.com/lassebahn/SQLEdit.git
 cd SqlEdit
 
 # Build mit Maven

@@ -5,11 +5,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import com.lasse.config.FxmlView;
 import com.lasse.control.StageManager;
+import com.lasse.model.EventStatus;
 import com.lasse.model.Server;
 import com.lasse.model.ServerListe;
 import com.roha.srvcls.service.PasswordEncoder;
@@ -47,6 +50,8 @@ public class ServerListeView extends BasisListeController<Server> {
 	private Server server;
 	private PasswordEncoder pe;
 	private boolean savePressed = false;
+	@Autowired
+	private ApplicationEventPublisher publisher;
 
 	@Lazy
 	public ServerListeView(StageManager stageManager) {
@@ -109,6 +114,8 @@ public class ServerListeView extends BasisListeController<Server> {
 		}
 		if (controller.connect(true, getStagenr())) {
 			controller.setStatus("Verbunden mit " + controller.getServer(getStagenr()), getStagenr());
+			EventStatus event = new EventStatus(this, controller.getStatus(getStagenr()), getStagenr());
+			publisher.publishEvent(event);
 		}
 		stageManager.switchToNextScene(FxmlView.SQLEDIT, getStagenr());
 	}

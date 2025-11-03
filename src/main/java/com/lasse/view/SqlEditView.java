@@ -32,6 +32,7 @@ import com.lasse.model.EventSaveSql;
 import com.lasse.model.EventSqlRead;
 import com.lasse.model.EventSqlReadMore;
 import com.lasse.model.EventSqlResponse;
+import com.lasse.model.EventStatus;
 import com.lasse.model.EventString;
 import com.lasse.model.Feld;
 import com.lasse.service.DbZugriff;
@@ -151,6 +152,7 @@ public class SqlEditView {
 		eventBridge.registerListener(EventReadSqlResponse.class, this::readSqlResponse);
 		eventBridge.registerListener(EventEinfuegenFeldSql1.class, this::eventEinfuegenFeld1);
 		eventBridge.registerListener(EventEinfuegenFeldSqlResponse.class, this::eventEinfuegenFeld2);
+		eventBridge.registerListener(EventStatus.class, this::eventStatus);
 	}
 
 	private void messageEvent(EventString e) {
@@ -178,7 +180,7 @@ public class SqlEditView {
 		controller.disconnect(servernr);
 		int count = counter.decrementAndGet();
 		eventBridge.unregisterListener(EventString.class, this::messageEvent);
-		System.out.println("SqlEditView zerstört. Instanzen übrig: " + count);
+		//System.out.println("SqlEditView zerstört. Instanzen übrig: " + count);
 	}
 
 	public void initData(int servernr) {
@@ -316,6 +318,17 @@ public class SqlEditView {
 			return;
 		EventEinfuegenFeldSql2 e2 = new EventEinfuegenFeldSql2(this, servernr, sqlField.getText(), e.getFeld(), cursor);
 		publisher.publishEvent(e2);
+	}
+
+	/**
+	 * Event Status ändern
+	 * 
+	 * @param e
+	 */
+	private void eventStatus(EventStatus e) {
+		if (e.getServernr() != this.servernr)
+			return;
+		setStatus(e.getStatus());
 	}
 
 	/**

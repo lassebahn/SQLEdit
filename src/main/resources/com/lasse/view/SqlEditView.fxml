@@ -25,14 +25,14 @@
    <content>
       <BorderPane fx:id="borderpane1">
          <center>
-                  <BorderPane fx:id="borderpane2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1600.0">
+                  <BorderPane fx:id="borderpane2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="800.0">
                      <top>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <center>
                               <GridPane alignment="CENTER" hgap="20" BorderPane.alignment="TOP_LEFT">
                                 <columnConstraints>
-                                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="50.0" />
-                                  <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="1400.0" />
+                                  <ColumnConstraints hgrow="ALWAYS" maxWidth="375.0" minWidth="10.0" prefWidth="55.0" />
+                                  <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="705.0" />
                                 </columnConstraints>
                                 <rowConstraints>
                                   <RowConstraints maxHeight="115.0" minHeight="10.0" prefHeight="115.0" vgrow="SOMETIMES" />

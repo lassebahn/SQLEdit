@@ -80,7 +80,7 @@ public class Controller {
 	private FileRW fileRW;
 	private PasswordEncoder pe;
 	private ServerListe serverListe;
-	private StringProperty[] status = new SimpleStringProperty[MAX_SERVER];
+	private String[] status = new String[MAX_SERVER];
 	private final static int MAXSEITE = 100;
 	private static final Logger logger = LogManager.getLogger(Controller.class);
 	@Autowired
@@ -100,7 +100,7 @@ public class Controller {
 				sqlserver[i] = null;
 				db[i] = null;
 				connected[i] = false;
-				status[i] = new SimpleStringProperty("keine Verbindung");
+				status[i] = new String("keine Verbindung");
 				fileTable[i] = new FileTableModel();
 				max[i] = MAXSEITE;
 				more[i] = true;
@@ -374,12 +374,12 @@ public class Controller {
 		logger.info("Verbindung " + i + " getrennt");
 	}
 
-	public StringProperty getStatus(int i) {
+	public String getStatus(int i) {
 		return status[i];
 	}
 
 	public void setStatus(String text, int i) {
-		this.status[i].set(text);
+		this.status[i] = text;
 	}
 
 	/**
@@ -413,7 +413,7 @@ public class Controller {
 		connect(false, event.getServernr());
 		if (!isConnected(event.getServernr())) {
 			int servernr = event.getServernr();
-			EventSqlResponse er = new EventSqlResponse(this, servernr, null, event.getSql(), null, false, false, "Keine Datenbank-Verbindung vorhanden.", getStatus(servernr).get(), false, true);
+			EventSqlResponse er = new EventSqlResponse(this, servernr, null, event.getSql(), null, false, false, "Keine Datenbank-Verbindung vorhanden.", getStatus(servernr), false, true);
 			publisher.publishEvent(er);
 		}
 		int maxrow = MAXSEITE;
@@ -434,13 +434,13 @@ public class Controller {
 		connect(false, event.getServernr());
 		if (!isConnected(event.getServernr())) {
 			int servernr = event.getServernr();
-			EventSqlResponse er = new EventSqlResponse(this, servernr, null, event.getSql(), null, false, false, "Keine Datenbank-Verbindung vorhanden.", getStatus(servernr).get(), false, false);
+			EventSqlResponse er = new EventSqlResponse(this, servernr, null, event.getSql(), null, false, false, "Keine Datenbank-Verbindung vorhanden.", getStatus(servernr), false, false);
 			publisher.publishEvent(er);
 		}
 		if (getDb(event.getServernr()).getDriver() == AbstractDBService.DRIVER_SQLSERVER) {
 			String s = event.getSql();
 			max[event.getServernr()] = max[event.getServernr()] + MAXSEITE;
-			int anz = lesen(s, event.getListe(), MAXSEITE, event.getMaxcol(), event.getServernr(), false, event.getSqlAbfrage());
+			int anz = lesen(s, event.getListe(), max[event.getServernr()], event.getMaxcol(), event.getServernr(), false, event.getSqlAbfrage());
 		} else {
 			mehrLesen(event.getListe(), event.getServernr());
 		}
@@ -470,6 +470,7 @@ public class Controller {
 						rs[servernr].close();
 						rs[servernr] = null;
 					}
+					liste.clear();
 					PreparedStatement psrsmd = db.getConn(db.getDriver()).prepareStatement(sql2);
 					rsmd[servernr] = psrsmd.getMetaData();
 					more[servernr] = false;
@@ -485,7 +486,6 @@ public class Controller {
 						}
 					}
 					psrsmd.close();
-					db.closeStmt();
 					fileTable[servernr].setFeldnamen(db.getFelder());
 					fileTable[servernr].setDispSizes(db.getDispSizes());
 					fileTable[servernr].setLabel(db.getLabels());
@@ -495,19 +495,19 @@ public class Controller {
 					fileTable[servernr].setKeynrs(db.getKeynrs());
 					anz = i;
 					setStatus("Verbunden mit " + getServer(servernr), servernr);
-					EventSqlResponse event = new EventSqlResponse(this, servernr, liste, sql2, fileTable[servernr], more[servernr], true, "Es wurden " + anz + " Datensätze gelesen.", getStatus(servernr).get(), true, neueTabelle);
+					EventSqlResponse event = new EventSqlResponse(this, servernr, liste, sql2, fileTable[servernr], more[servernr], true, "Es wurden " + anz + " Datensätze gelesen.", getStatus(servernr), true, neueTabelle);
 					publisher.publishEvent(event);
 				}
 			} else {
 				setStatus("Aktueller Server: " + getServer(servernr) + " - Keine Datenbank-Verbindung vorhanden.", servernr);
-				EventSqlResponse event = new EventSqlResponse(this, servernr, liste, sql2, fileTable[servernr], more[servernr], false, "Keine Datenbank-Verbindung vorhanden.", getStatus(servernr).get(), false, neueTabelle);
+				EventSqlResponse event = new EventSqlResponse(this, servernr, liste, sql2, fileTable[servernr], more[servernr], false, "Keine Datenbank-Verbindung vorhanden.", getStatus(servernr), false, neueTabelle);
 				publisher.publishEvent(event);
 				anz = -1;
 			}
 		} catch (SQLException e) {
 			logger.error(e.getMessage(), e);
 			//MessageLine.addText(msgLine, "Error: " + e.getMessage());
-			EventSqlResponse event = new EventSqlResponse(this, servernr, liste, sql2, fileTable[servernr], more[servernr], false, "Error: " + e.getMessage(), getStatus(servernr).get(), true, neueTabelle);
+			EventSqlResponse event = new EventSqlResponse(this, servernr, liste, sql2, fileTable[servernr], more[servernr], false, "Error: " + e.getMessage(), getStatus(servernr), true, neueTabelle);
 			publisher.publishEvent(event);
 			return -1;
 		}
@@ -540,13 +540,13 @@ public class Controller {
 					}
 				}
 				anz = i;
-				EventSqlResponse event = new EventSqlResponse(this, servernr, liste, "", fileTable[servernr], more[servernr], true, "Es wurden " + anz + " Datensätze gelesen.", getStatus(servernr).get(), true, false);
+				EventSqlResponse event = new EventSqlResponse(this, servernr, liste, "", fileTable[servernr], more[servernr], true, "Es wurden " + anz + " Datensätze gelesen.", getStatus(servernr), true, false);
 				publisher.publishEvent(event);
 			}
 		} catch (SQLException e) {
 			logger.error(e.getMessage(), e);
 			//MessageLine.addText(msgLine, MessageLine.formatText("Error: " + e.getMessage()));
-			EventSqlResponse event = new EventSqlResponse(this, servernr, liste, "", fileTable[servernr], more[servernr], false, "Error: " + e.getMessage(), getStatus(servernr).get(), true, false);
+			EventSqlResponse event = new EventSqlResponse(this, servernr, liste, "", fileTable[servernr], more[servernr], false, "Error: " + e.getMessage(), getStatus(servernr), true, false);
 			publisher.publishEvent(event);
 			anz = -1;
 		}
